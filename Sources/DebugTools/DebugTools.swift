@@ -1,11 +1,13 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
-/// A macro that produces both a value and a string containing the
-/// source code that generated the value. For example,
-///
-///     #stringify(x + y)
-///
-/// produces a tuple `(x + y, "x + y")`.
-@freestanding(expression)
-public macro stringify<T>(_ value: T) -> (T, String) = #externalMacro(module: "DebugToolsMacros", type: "StringifyMacro")
+@_exported import Foundation
+@_exported import OSLog
+
+/// Measures a function's execution with a signpost interval, ending it on every exit.
+@attached(body)
+public macro SignPoster(subsystem: String = "BundleIdentifier", category: OSLog.Category) = #externalMacro(module: "DebugToolsMacros", type: "SignPoster")
+
+/// Measures a function's execution with a signpost interval, ending it on every exit.
+@attached(body)
+public macro SignPoster(subsystem: String = "BundleIdentifier", category: String) = #externalMacro(module: "DebugToolsMacros", type: "SignPoster")

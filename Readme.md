@@ -10,7 +10,7 @@ The first (and only) macro for now helps you mark function calls in Instruments.
 
 Attach SignPoster to any function like so:
 ```swift
-@SignPoster(category: .pointsOfInterest)
+@SignPoster(name: "User Ran FooBar", category: .pointsOfInterest)
 func FooBar() {
     ...
 }

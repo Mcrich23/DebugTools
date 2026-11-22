@@ -1,6 +1,6 @@
 import DebugTools
 
-@SignPoster(category: .pointsOfInterest)
+@SignPoster(name: "TestFunction", category: .pointsOfInterest)
 func test() {
     print("Test")
 }

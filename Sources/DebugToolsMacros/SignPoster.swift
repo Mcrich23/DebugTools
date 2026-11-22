@@ -19,11 +19,14 @@ struct SignPoster: BodyMacro {
             throw InvalidFunction()
         }
 
+        var name: ExprSyntax = ExprSyntax(literal: function.name.text)
         var subsystem: ExprSyntax = "\"BundleIdentifier\""
         var category: ExprSyntax = ".pointsOfInterest"
         if case .argumentList(let arguments) = node.arguments {
             for argument in arguments {
                 switch argument.label?.text {
+                case "name":
+                    name = argument.expression
                 case "subsystem":
                     subsystem = argument.expression
                 case "category":
@@ -38,7 +41,6 @@ struct SignPoster: BodyMacro {
         let resolvedSubsystem = context.makeUniqueName("resolvedSubsystem")
         let signposter = context.makeUniqueName("signposter")
         let interval = context.makeUniqueName("signpostInterval")
-        let name = StringLiteralExprSyntax(content: function.name.text)
         var statements = Array(body.statements)
 
         // Adding statements removes Swift's implicit return for a single-expression body.
